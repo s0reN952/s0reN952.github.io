@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio</title>
+  <meta name="description" content="Portfolio de Soren Ouyahia : projets en cybersécurité et développement.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="evitement" href="#projets">Aller aux projets</a>
+
+  <header class="entete">
+    <a class="entete-nom" href="#haut" data-champ="nom"></a>
+    <nav class="entete-nav" aria-label="Navigation principale">
+      <a href="#projets">Projets</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#competences">Compétences</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="haut">
+
+    <!-- Accueil -->
+    <section class="accueil">
+      <div class="accueil-texte">
+        <h1 class="accueil-nom" data-champ="nom"></h1>
+        <p class="accueil-metier" data-champ="metier"></p>
+        <p class="accueil-accroche" data-champ="accroche"></p>
+        <p class="accueil-dispo"><span class="voyant" aria-hidden="true"></span><span data-champ="disponibilite"></span></p>
+        <div class="accueil-actions">
+          <a class="bouton bouton-plein" href="#projets">Voir mes projets</a>
+          <a class="bouton bouton-trait" data-lien="cv" download>Télécharger mon CV</a>
+        </div>
+      </div>
+      <figure class="accueil-schema" aria-label="Schéma de mon environnement de test">
+        <svg id="schema" viewBox="0 0 540 360" role="img"></svg>
+      </figure>
+    </section>
+
+    <!-- Projets -->
+    <section class="section" id="projets">
+      <div class="section-tete">
+        <h2>Projets <span class="compteur" id="compteur"></span></h2>
+        <div class="filtres" role="group" aria-label="Filtrer les projets">
+          <button type="button" class="filtre" data-filtre="Tous" aria-pressed="true">Tous</button>
+          <button type="button" class="filtre" data-filtre="École" aria-pressed="false">École</button>
+          <button type="button" class="filtre" data-filtre="Entreprise" aria-pressed="false">Entreprise</button>
+        </div>
+      </div>
+      <ul class="projets" id="liste-projets"></ul>
+    </section>
+
+    <!-- À propos + parcours -->
+    <section class="section section-duo" id="parcours">
+      <div>
+        <h2>À propos</h2>
+        <div class="apropos" id="apropos"></div>
+      </div>
+      <div>
+        <h2>Parcours</h2>
+        <ol class="parcours" id="liste-parcours"></ol>
+      </div>
+    </section>
+
+    <!-- Compétences -->
+    <section class="section" id="competences">
+      <h2>Compétences</h2>
+      <div class="competences" id="liste-competences"></div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact" id="contact">
+      <h2>Contact</h2>
+      <p class="contact-intro">Vous recrutez ou souhaitez échanger sur un projet ? Écrivez-moi.</p>
+      <a class="contact-email" data-lien="email"></a>
+      <ul class="contact-liens" id="contact-liens"></ul>
+    </section>
+
+  </main>
+
+  <footer class="pied">
+    <p><span data-champ="nom"></span>, <span data-champ="localisation"></span></p>
+  </footer>
+
+  <!-- Fenêtre de détail d'un projet -->
+  <dialog class="fiche" id="fiche" aria-labelledby="fiche-titre">
+    <div class="fiche-contenu">
+      <button type="button" class="fiche-fermer" id="fiche-fermer" aria-label="Fermer">×</button>
+      <div id="fiche-corps"></div>
+    </div>
+  </dialog>
+
+  <script src="contenu.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

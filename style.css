@@ -1,0 +1,271 @@
+/* =====================================================================
+   Styles du portfolio
+   Pour changer les couleurs, modifie seulement les valeurs ci-dessous.
+   ===================================================================== */
+:root {
+  --fond: #edf0f3;        /* gris acier clair */
+  --surface: #f8f9fb;     /* fond des fiches */
+  --encre: #15202e;       /* texte principal */
+  --encre-douce: #4a5667; /* texte secondaire */
+  --trait: #c6ced8;       /* lignes et bordures */
+  --signal: #1f4fd8;      /* couleur d'accent (liens, boutons) */
+  --ok: #2e8b57;          /* voyant "disponible" */
+
+  --titre: "IBM Plex Sans Condensed", "Arial Narrow", sans-serif;
+  --texte: "IBM Plex Sans", system-ui, sans-serif;
+
+  --marge: clamp(1.25rem, 5vw, 4rem);
+  --largeur: 72rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--encre);
+  font: 400 1.0625rem/1.6 var(--texte);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: var(--titre); margin: 0; line-height: 1.1; }
+h2 { font-size: clamp(1.9rem, 3.5vw, 2.5rem); font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--signal); text-underline-offset: 0.2em; }
+
+:focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
+
+.evitement {
+  position: absolute; left: 1rem; top: -4rem; z-index: 20;
+  background: var(--encre); color: #fff; padding: 0.6rem 1rem;
+}
+.evitement:focus { top: 1rem; }
+
+/* ---------- En-tête ---------- */
+.entete {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 0.9rem var(--marge);
+  background: color-mix(in srgb, var(--fond) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--trait);
+}
+.entete-nom {
+  font: 700 1.15rem var(--titre); color: var(--encre); text-decoration: none;
+}
+.entete-nav { display: flex; gap: clamp(0.9rem, 2.5vw, 2rem); }
+.entete-nav a { color: var(--encre-douce); text-decoration: none; font-size: 0.95rem; }
+.entete-nav a:hover { color: var(--encre); }
+
+/* ---------- Accueil ---------- */
+.accueil {
+  max-width: var(--largeur); margin: 0 auto;
+  padding: clamp(3rem, 9vw, 7rem) var(--marge) clamp(3rem, 7vw, 5rem);
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center;
+}
+.accueil-nom {
+  font-size: clamp(3.2rem, 8.5vw, 6.75rem);
+  font-weight: 700; line-height: 0.92; letter-spacing: -0.025em;
+}
+.accueil-metier {
+  margin-top: 1.1rem;
+  font: 500 clamp(1.2rem, 2.2vw, 1.5rem)/1.3 var(--titre);
+}
+.accueil-accroche { margin-top: 0.75rem; max-width: 34ch; color: var(--encre-douce); }
+.accueil-dispo {
+  margin-top: 1.5rem; display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.95rem;
+}
+.voyant {
+  width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--ok);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 20%, transparent);
+}
+.accueil-actions { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+.bouton {
+  display: inline-block; padding: 0.75rem 1.25rem; border-radius: 4px;
+  font: 600 0.95rem var(--texte); text-decoration: none; cursor: pointer;
+  border: 1.5px solid var(--signal);
+}
+.bouton-plein { background: var(--signal); color: #fff; }
+.bouton-plein:hover { background: color-mix(in srgb, var(--signal) 85%, black); }
+.bouton-trait { color: var(--signal); background: transparent; }
+.bouton-trait:hover { background: color-mix(in srgb, var(--signal) 8%, transparent); }
+
+/* Schéma réseau */
+.accueil-schema { margin: 0; }
+#schema { width: 100%; height: auto; display: block; overflow: visible; }
+.cables path {
+  fill: none; stroke: var(--encre-douce); stroke-width: 1.5;
+  stroke-dasharray: 1; stroke-dashoffset: 1;
+  animation: tracer 0.7s ease-out 0.25s forwards;
+}
+.noeud { opacity: 0; animation: apparaitre 0.4s ease-out forwards; animation-delay: calc(0.15s + var(--i) * 0.12s); }
+.noeud rect { fill: var(--surface); stroke: var(--trait); stroke-width: 1.5; }
+.noeud-hote rect { fill: var(--encre); stroke: var(--encre); }
+.noeud-type { font: 500 13px var(--texte); fill: #a9b4c3; }
+.noeud-nom { font: 600 17px var(--titre); fill: #fff; }
+.noeud-vm { font: 500 15px var(--texte); fill: var(--encre); }
+.noeud-voyant { fill: var(--ok); }
+@keyframes tracer { to { stroke-dashoffset: 0; } }
+@keyframes apparaitre { to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .cables path { animation: none; stroke-dashoffset: 0; }
+  .noeud { animation: none; opacity: 1; }
+}
+
+/* ---------- Sections ---------- */
+.section {
+  max-width: var(--largeur); margin: 0 auto;
+  padding: clamp(3rem, 7vw, 5rem) var(--marge);
+  border-top: 1px solid var(--trait);
+}
+.section > h2 { margin-bottom: 2rem; }
+.section-tete {
+  display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between;
+  gap: 1rem; margin-bottom: 1.5rem;
+}
+.compteur { color: var(--encre-douce); font-weight: 500; }
+
+/* Filtres */
+.filtres { display: flex; gap: 0.25rem; padding: 0.25rem; border: 1px solid var(--trait); border-radius: 6px; }
+.filtre {
+  font: 500 0.9rem var(--texte); color: var(--encre-douce);
+  background: none; border: 0; border-radius: 4px; padding: 0.45rem 0.9rem; cursor: pointer;
+}
+.filtre[aria-pressed="true"] { background: var(--encre); color: #fff; }
+
+/* Liste des projets : une ligne par projet */
+.projets { list-style: none; margin: 0; padding: 0; border-top: 1.5px solid var(--encre); }
+.projets li { border-bottom: 1px solid var(--trait); }
+.projet {
+  width: 100%; text-align: left; font: inherit; color: inherit; cursor: pointer;
+  background: none; border: 0; padding: 1.5rem 0.5rem;
+  display: grid; grid-template-columns: 4.5rem 1fr auto 5rem; gap: 1.5rem; align-items: baseline;
+}
+.projet:hover { background: color-mix(in srgb, var(--surface) 70%, transparent); }
+.projet:hover .projet-titre { color: var(--signal); }
+.projet-annee { font: 500 1rem var(--titre); color: var(--encre-douce); }
+.projet-principal { display: grid; gap: 0.3rem; }
+.projet-titre { font: 600 clamp(1.25rem, 2.2vw, 1.55rem)/1.2 var(--titre); }
+.projet-resume { color: var(--encre-douce); max-width: 60ch; }
+.projet-technos { font-size: 0.875rem; color: var(--encre-douce); }
+.projet-cadre {
+  font-size: 0.8rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 3px;
+  border: 1.5px solid var(--encre); white-space: nowrap;
+}
+.cadre-entreprise { background: var(--encre); color: #fff; }
+.projet-ouvrir { font-size: 0.9rem; font-weight: 600; color: var(--signal); text-align: right; }
+.projets-vide { padding: 2rem 0.5rem; color: var(--encre-douce); }
+
+/* À propos et parcours */
+.section-duo { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); }
+.section-duo h2 { margin-bottom: 1.5rem; }
+.apropos { display: grid; gap: 1rem; max-width: 60ch; }
+.parcours { list-style: none; margin: 0; padding: 0; }
+.parcours li {
+  position: relative; padding: 0 0 1.75rem 1.5rem;
+  border-left: 1.5px solid var(--trait);
+}
+.parcours li:last-child { padding-bottom: 0; }
+.parcours li::before {
+  content: ""; position: absolute; left: -6px; top: 0.4rem;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--fond); border: 1.5px solid var(--encre);
+}
+.parcours li:first-child::before { background: var(--encre); }
+.parcours-periode { font-size: 0.875rem; color: var(--encre-douce); }
+.parcours-titre { font: 600 1.2rem/1.3 var(--titre); margin-top: 0.15rem; }
+.parcours-lieu { font-size: 0.95rem; }
+.parcours-desc { font-size: 0.95rem; color: var(--encre-douce); margin-top: 0.25rem; }
+
+/* Compétences */
+.competences {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 2rem 2.5rem;
+}
+.competence h3 { padding-bottom: 0.6rem; margin-bottom: 0.75rem; border-bottom: 1.5px solid var(--encre); }
+.competence ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
+
+/* Contact */
+.contact-intro { color: var(--encre-douce); margin-top: -1rem; }
+.contact-email {
+  display: inline-block; margin-top: 1.25rem;
+  font: 700 clamp(1.6rem, 5vw, 3rem)/1.1 var(--titre); letter-spacing: -0.01em;
+  color: var(--encre); text-decoration-color: var(--signal); text-decoration-thickness: 3px;
+  word-break: break-word;
+}
+.contact-email:hover { color: var(--signal); }
+.contact-liens { list-style: none; margin: 1.75rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; }
+.contact-liens a { font-weight: 600; }
+
+.pied {
+  max-width: var(--largeur); margin: 0 auto; padding: 2rem var(--marge) 3rem;
+  border-top: 1px solid var(--trait); color: var(--encre-douce); font-size: 0.875rem;
+}
+
+/* ---------- Fiche projet ---------- */
+.fiche {
+  width: min(52rem, calc(100% - 2rem)); max-height: calc(100% - 3rem);
+  padding: 0; border: 0; border-radius: 8px;
+  background: var(--surface); color: var(--encre);
+  box-shadow: 0 30px 80px -20px rgb(21 32 46 / 0.45);
+}
+.fiche::backdrop { background: rgb(21 32 46 / 0.55); }
+.fiche[open] { animation: ouvrir 0.2s ease-out; }
+@keyframes ouvrir { from { opacity: 0; transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) { .fiche[open] { animation: none; } }
+
+.fiche-contenu { position: relative; padding: clamp(1.5rem, 4vw, 2.75rem); }
+.fiche-fermer {
+  position: absolute; top: 1rem; right: 1rem;
+  width: 2.5rem; height: 2.5rem; border-radius: 50%;
+  border: 1px solid var(--trait); background: var(--fond);
+  font-size: 1.5rem; line-height: 1; cursor: pointer; color: var(--encre);
+}
+.fiche-fermer:hover { border-color: var(--encre); }
+.fiche-tete { padding-right: 3rem; }
+.fiche-meta { font-size: 0.9rem; color: var(--encre-douce); }
+.fiche-tete h2 { margin-top: 0.4rem; font-size: clamp(1.7rem, 4vw, 2.4rem); }
+.fiche-resume { margin-top: 0.75rem; font-size: 1.1rem; max-width: 60ch; }
+.fiche-note {
+  margin-top: 1.5rem; padding: 0.85rem 1rem; font-size: 0.95rem;
+  border-left: 3px solid var(--encre); background: var(--fond);
+}
+.fiche-images { margin-top: 1.75rem; display: grid; gap: 1rem; }
+.fiche-images figure { margin: 0; }
+.fiche-images img { width: 100%; height: auto; display: block; border: 1px solid var(--trait); border-radius: 4px; background: #fff; }
+.fiche-images figcaption { margin-top: 0.5rem; font-size: 0.875rem; color: var(--encre-douce); }
+.fiche-grille {
+  margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem 2.5rem;
+}
+.fiche-bloc h3 { margin-bottom: 0.4rem; }
+.fiche-bloc ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.3rem; }
+.fiche-bloc p { color: var(--encre-douce); }
+.fiche-bloc li { color: var(--encre-douce); }
+.fiche-bloc .etiquettes { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.fiche-bloc .etiquettes li {
+  color: var(--encre); font-size: 0.875rem; font-weight: 500;
+  padding: 0.2rem 0.6rem; border: 1px solid var(--trait); border-radius: 3px; background: #fff;
+}
+.fiche-liens { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 860px) {
+  .accueil { grid-template-columns: 1fr; }
+  .accueil-schema { max-width: 32rem; }
+  .section-duo { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .entete-nav a:nth-child(2), .entete-nav a:nth-child(3) { display: none; }
+  .projet { grid-template-columns: 1fr auto; gap: 0.5rem 1rem; padding: 1.25rem 0.25rem; }
+  .projet-annee { grid-column: 1; grid-row: 1; }
+  .projet-cadre { grid-column: 2; grid-row: 1; justify-self: end; }
+  .projet-principal { grid-column: 1 / -1; }
+  .projet-ouvrir { display: none; }
+  .fiche-grille { grid-template-columns: 1fr; }
+}
