@@ -34,64 +34,6 @@
     a.textContent = C.email;
   });
 
-  // ---------- Schéma de l'accueil ----------
-  (function dessinerSchema() {
-    const svg = $("#schema");
-    const NS = "http://www.w3.org/2000/svg";
-    const machines = (C.labo.machines || []).slice(0, 5);
-    const s = (tag, attrs) => {
-      const n = document.createElementNS(NS, tag);
-      for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
-      return n;
-    };
-
-    const H = 360, hautMachine = 44, ecart = 18;
-    const total = machines.length * hautMachine + (machines.length - 1) * ecart;
-    const y0 = (H - total) / 2;
-    const centreY = H / 2;
-    const busX = 262;
-
-    // Câbles
-    const cables = s("g", { class: "cables" });
-    cables.append(s("path", { d: `M222 ${centreY} H${busX}`, pathLength: 1 }));
-    if (machines.length > 1) {
-      const yHaut = y0 + hautMachine / 2;
-      const yBas = y0 + total - hautMachine / 2;
-      cables.append(s("path", { d: `M${busX} ${yHaut} V${yBas}`, pathLength: 1 }));
-    }
-    machines.forEach((_, i) => {
-      const y = y0 + i * (hautMachine + ecart) + hautMachine / 2;
-      cables.append(s("path", { d: `M${busX} ${y} H300`, pathLength: 1 }));
-    });
-    svg.append(cables);
-
-    // Hyperviseur
-    const hote = s("g", { class: "noeud noeud-hote", style: "--i:0" });
-    hote.append(s("rect", { x: 0, y: centreY - 40, width: 222, height: 80, rx: 6 }));
-    const t1 = s("text", { x: 18, y: centreY - 8, class: "noeud-type" });
-    t1.textContent = "Hôte";
-    const t2 = s("text", { x: 18, y: centreY + 16, class: "noeud-nom" });
-    t2.textContent = C.labo.centre;
-    hote.append(t1, t2);
-    svg.append(hote);
-
-    // Machines virtuelles
-    machines.forEach((nom, i) => {
-      const y = y0 + i * (hautMachine + ecart);
-      const g = s("g", { class: "noeud", style: `--i:${i + 1}` });
-      g.append(s("rect", { x: 300, y, width: 230, height: hautMachine, rx: 4 }));
-      g.append(s("circle", { cx: 318, cy: y + hautMachine / 2, r: 4, class: "noeud-voyant" }));
-      const t = s("text", { x: 332, y: y + hautMachine / 2 + 5, class: "noeud-vm" });
-      t.textContent = nom;
-      g.append(t);
-      svg.append(g);
-    });
-
-    const titre = s("title", {});
-    titre.textContent = `${C.labo.centre} hébergeant : ${machines.join(", ")}`;
-    svg.prepend(titre);
-  })();
-
   // ---------- Projets ----------
   const liste = $("#liste-projets");
   const compteur = $("#compteur");
