@@ -4,10 +4,10 @@
 
 const CONTENU = {
 
-  // ---------- Toi ----------
+  // ---------- Profil ----------
   nom: "Soren Ouyahia",
   metier: "Alternant en informatique, orienté cybersécurité",
-  accroche: "Je conçois des outils pour détecter, analyser et prévenir les attaques, et j'automatise les tâches de sécurité avec du code.",
+  accroche: "Je conçois des outils pour détecter, analyser et prévenir les attaques et j'automatise les tâches de sécurité avec du code.",
   disponibilite: "En alternance chez Command Strategy, ouvert à un CDI à la fin de mes études",
   localisation: "Val-d'Oise, Île-de-France",
 
@@ -17,56 +17,47 @@ const CONTENU = {
   github: "https://github.com/s0reN952",
   cv: "cv.pdf",
 
-  // ---------- À propos (un paragraphe par ligne) ----------
+  // ---------- À propos ----------
   aPropos: [
-    "J'ai 22 ans et je suis étudiant à l'ESGI à Paris, en cursus alternance. Après des expériences chez ARKEMA, Thalia NeoMedia et Command Strategy, je me spécialise en cybersécurité.",
+    "J'ai 22 ans et je suis étudiant à l'ESGI à Paris en cursus alternance. Après des expériences chez ARKEMA, Thalia NeoMedia et Command Strategy, je me spécialise en cybersécurité.",
     "Ce qui m'intéresse : comprendre comment les attaquants agissent pour mieux protéger. Mes projets vont de la détection (honeypot, SIEM) à la sensibilisation des utilisateurs (campagne de phishing).",
     "Mon objectif est de devenir un profil cybersécurité capable d'automatiser ses outils avec du code. J'aime travailler en équipe et échanger avec des interlocuteurs variés."
   ],
 
   // ---------- Schéma de l'accueil ----------
-  // Le petit schéma à droite de ton nom : ton hyperviseur au centre et
-  // jusqu'à 5 machines virtuelles. Adapte les noms à ce que tu utilises.
   labo: {
     centre: "VMware Workstation",
     machines: [
-      "SIEM Wazuh (Docker)",
-      "Serveur Debian 13",
-      "Pare-feu pfSense"
+      "SIEM Wazuh Manager (Dashboard)",
+      "Serveur-Web (attaque et collecte de logs)",
+      "FireWall pfSense (logs et pare-feux)"
     ]
   },
 
   // ---------- Projets ----------
-  // cadre : "École" ou "Entreprise"
-  // confidentiel : true = une note indique que le projet est présenté
-  //                sans données internes.
-  // images : ajoute tes captures dans le dossier images/, par exemple
-  //          { fichier: "images/honeypot-schema.png", legende: "Architecture du honeypot" }
-  // liens : laisse [] si le projet n'est pas en ligne.
   projets: [
     {
       titre: "Honeypot SSH et analyse des attaques",
       cadre: "École",
       annee: "2026",
-      resume: "Un honeypot SSH développé de zéro en Python, déployé sur un VPS, qui a capturé de vraies attaques venues d'Internet.",
+      resume: "Un honeypot SSH développé de zéro en Python déployé sur un VPS qui a capturé de vraies attaques venues d'Internet.",
       contexte: "Projet annuel de 3e année à l'ESGI (cybersécurité), réalisé à trois sur 5 mois. Chacun a développé un honeypot (SSH, Web, FTP), reliés ensuite dans une infrastructure commune. Le cahier des charges imposait un développement 100 % personnalisé, sans réutiliser de solution existante comme Cowrie.",
       objectif: "Piéger des attaquants avec de faux services exposés sur Internet pour détecter leurs attaques, enregistrer leurs actions et analyser leurs techniques.",
-      role: "J'ai pris en charge le honeypot SSH, que j'ai développé entièrement en Python, ainsi que ses scripts d'analyse. Je l'ai ensuite relié au back office commun du groupe.",
+      role: "J'ai pris en charge le honeypot SSH, que j'ai développé entièrement en Python ainsi que ses scripts d'analyse. Je l'ai ensuite relié au back office commun du groupe.",
       realisations: [
-        "Serveur SSH factice basé sur Paramiko, qui accepte plusieurs connexions simultanées grâce à socket et threading",
+        "Serveur SSH factice basé sur Paramiko qui accepte plusieurs connexions simultanées grâce à socket et threading",
         "Identifiants volontairement faibles pour attirer les attaquants, et journalisation de chaque tentative de connexion (réussie ou échouée) au format JSONL",
         "Faux shell Linux qui enregistre toutes les commandes tapées, sans jamais exposer la vraie machine",
         "Script de rapport en ligne de commande : identifiants, mots de passe et adresses IP les plus utilisés par les attaquants",
         "Génération de graphiques d'analyse avec matplotlib",
         "Déploiement en service persistant sur un VPS OVH (Debian/Ubuntu)",
-        "Raccordement au back office commun (Flask + SQLite) qui rassemble les logs des trois honeypots dans un tableau de bord unique, sur le principe d'un SIEM",
+        "Raccordement au back office commun (Flask + SQLite) qui rassemble les logs des trois honeypots dans un tableau de bord unique sur le principe d'un SIEM",
         "Tests d'intrusion pour valider le honeypot : scan Nmap, brute force avec Hydra"
       ],
       technologies: ["Python", "Paramiko", "matplotlib", "Flask", "SQLite", "JSONL", "Linux (Debian/Ubuntu)", "VPS OVH", "Nmap", "Hydra"],
       resultat: "Une fois en ligne sur le VPS, le honeypot a capturé de véritables attaques automatisées venant d'adresses IP externes : tentatives de connexion par force brute, toutes enregistrées puis analysées avec les scripts de rapport et de graphiques.",
       images: [],
       liens: [],
-      confidentiel: false
     },
     {
       titre: "Déploiement automatisé d'un SIEM open source",
@@ -90,7 +81,6 @@ const CONTENU = {
       resultat: "Un SIEM opérationnel qui se redéploie à l'identique en une commande et détecte les principales phases d'une attaque, du scan réseau jusqu'à l'escalade de privilèges, en prévenant sur trois canaux.",
       images: [],
       liens: [],
-      confidentiel: false
     },
     {
       titre: "Simulateur de campagnes de phishing",
@@ -112,10 +102,7 @@ const CONTENU = {
         "Pipelines CI/CD Azure DevOps en YAML : build et déploiement de la base séparés, environnements Développement et Production pilotés par la branche Git"
       ],
       technologies: ["C#", "ASP.NET Core", "Entity Framework Core", "SQL Server", "Microsoft Entra ID", "Microsoft Graph API", "Swagger / OpenAPI", "Azure DevOps", "Clean Architecture"],
-      resultat: "Un outil complet, déployé automatiquement en développement et en production, qui permet à l'entreprise de lancer ses propres campagnes de sensibilisation et d'obtenir des statistiques fiables grâce au filtrage des clics automatiques.",
-      images: [],
-      liens: [],
-      confidentiel: true
+      resultat: "Un outil complet déployé automatiquement en développement et en production, qui permet à l'entreprise de lancer ses propres campagnes de sensibilisation et d'obtenir des statistiques fiables grâce au filtrage des clics automatiques.",
     }
   ],
 
