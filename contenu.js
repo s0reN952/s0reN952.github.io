@@ -21,7 +21,6 @@ const CONTENU = {
   aPropos: [
     "J'ai 22 ans et je suis étudiant à l'ESGI à Paris en cursus alternance. Après des expériences chez ARKEMA, Thalia NeoMedia et Command Strategy, je me spécialise en cybersécurité.",
     "Ce qui m'intéresse : comprendre comment les attaquants agissent pour mieux protéger. Mes projets vont de la détection (honeypot, SIEM) à la sensibilisation des utilisateurs (campagne de phishing).",
-    "Mon objectif est de devenir un profil cybersécurité capable d'automatiser ses outils avec du code. J'aime travailler en équipe et échanger avec des interlocuteurs variés."
   ],
 
   // ---------- Schéma de l'accueil ----------
